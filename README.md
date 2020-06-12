@@ -4,9 +4,9 @@
 
 # Overview
 
-The ActionStats library is useful for reporting the average time for a set of actions.
+The ActionStats java library can be used to measure the average time for a set of actions.
 Multiple threads can freely report activity in parallel without contention for underlying resources.
-The only project dependencies are on Java 1.8 JDK and Maven.  Ensure those are preinstalled and available.
+The only project dependencies are on Maven and Java JDK version 1.8 or higher.  Ensure those are preinstalled and available.
 
 
 # Getting Started
@@ -14,10 +14,16 @@ The only project dependencies are on Java 1.8 JDK and Maven.  Ensure those are p
 This library is packaged as a JAR, suitable for inclusion in your own projects.  You can build a local copy using Maven:
 
 ```
-ActionStats> mvn package
+actionstats> mvn package
 ```
 
 This command runs all of the tests & produces the JAR `target/actionstats-1.0.jar`.
+
+
+Tests are easy to run with:
+```
+actionstats> mvn test
+```
 
 
 # API
@@ -32,18 +38,18 @@ public interface ActionStats {
 ```
 
 ## addAction(String json)
-This method accepts a JSON string for an object with two properties: `action` & `time`.
-* It throws an exception if the JSON is not properly formatted.
+This method accepts a JSON string for an object with two properties: `action` & `time`, for example: `{ "action": "api", "time": 52 }`
+* `addAction()` throws an exception if the JSON is not properly formatted.
 * Negative values for `time` are not allowed.
 * The `action` can be any non-empty String.
 
 ## getStats()
-This method returns a JSON report of the average times for all actions.  This can be called multiple times or concurrently.
+This method returns a JSON report of the average time for each action.  This can be called multiple times or concurrently.  There is no easy way to "reset" the metrics other than creating a new instance of this class.  Some developers consider this a feature...
 
 
 # Use Cases and Examples
 
-In your project, include a dependency on `dev.bolinger.actionstats` and copy the JAR.
+In your project, include a dependency on `dev.bolinger / actionstats / 1.0` and copy the JAR.
 (TODO: Publish to Maven Central so developers can pull from there!)
 
 ```
@@ -63,10 +69,10 @@ String report = stats.getStats();
 
 Contributions to the code, examples, documentation, etc. are very much appreciated.
 
-- Report issues and bugs directly in [this GitHub project](https://github.com/ebolinger/actionstats/issues).
+* Report issues and bugs directly in [this GitHub project](https://github.com/ebolinger/actionstats/issues).
 
 
 # License
 
-The project is provided as-is without an warranty or license.
+The project is provided as-is without warranty or license.
 
