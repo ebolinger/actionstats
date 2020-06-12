@@ -106,6 +106,16 @@ stats.addAction("{ \"action\":\"jump\", \"time\": 200 }");
 String report = stats.getStats();
 ```
 
+The `report` string contains a snapshot of the running statistics, for example:
+```
+[ {
+  "action" : "run",
+  "average" : 75
+}, {
+  "action" : "jump",
+  "average" : 150
+} ]
+```
 
 # Contributing
 
